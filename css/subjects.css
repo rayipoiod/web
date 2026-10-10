@@ -165,3 +165,10 @@
   border:none; border-bottom:4px dashed var(--blue2); background:#F3FBFF;
   border-radius:10px 10px 0 0; padding:6px 10px; font-family:inherit; min-width:130px;}
 #inpPart{width:170px;} #inpUse{width:240px;}
+/* ---------- General Studies: compare table (P18) ---------- */
+.cmp-table{width:100%; border-collapse:separate; border-spacing:0 8px; margin:10px 0;}
+.cmp-table th{font-size:15px; color:var(--ink); padding:4px 6px;}
+.cmp-table td{background:#F7FCFF; border:3px solid var(--bord); padding:8px 6px; text-align:center; font-weight:800;}
+.cmp-table td:first-child{border-radius:14px 0 0 14px;}
+.cmp-table td:last-child{border-radius:0 14px 14px 0;}
+.cmp-table .choices{justify-content:center;}

@@ -730,6 +730,98 @@ function buildP17(){
   return [{banner:B17,html:h},{banner:B17,html:h2},{banner:B17,html:h3},{banner:B17,html:h4}];
 }
 
+/* ================= PAGE 18 · GS10 · my body & posture (MCQ / yes-no / compare table / typing) ================= */
+function buildP18(){
+  const B18 = banner('unicorn','Unit 1 · Know Yourself — My Body & Posture',
+    'A–D. Choose, judge, compare and TYPE — show what you know about your body and posture! 🙋🪑✏️');
+  /* --- p18a: multiple choice (3 questions) --- */
+  const MC=[
+    {q:'18a1',want:'Back',text:'Which part of the body should we keep straight when we sit?',
+     opts:[{v:'Back',h:'Back'},{v:'Arms',h:'Arms'},{v:'Fingers',h:'Fingers'},{v:'Hair',h:'Hair'}]},
+    {q:'18a2',want:'Flat on the floor',text:'When we sit, where should our feet be?',
+     opts:[{v:'Flat on the floor',h:'Flat on the floor'},{v:'Crossed',h:'Crossed'},
+           {v:'Hanging in the air',h:'Hanging in the air'},{v:'On the table',h:'On the table'}]},
+    {q:'18a3',want:'Have a shower',text:'What should we do every day to keep the body clean?',
+     opts:[{v:'Have a shower',h:'Have a shower'},{v:'Eat sweets',h:'Eat sweets'},
+           {v:'Watch TV all day',h:'Watch TV all day'},{v:'Skip sleep',h:'Skip sleep'}]}];
+  let h=`<div class="card" id="p18a">${cardHead('p18a','A','My body — read and choose! 🙋',
+    'A. Circle the correct answer for each question.',true)}`;
+  h+=MC.map((m,i)=>`<div class="qline">${i+1}. ${m.text} ( ${choiceGroup(m.q,shuf(m.opts))} )</div>`).join('');
+  h+=cardFoot('p18a')+`</div>`;
+  G.cards['p18a']={check(){
+    const card=$('#p18a'); hintHide('p18a');
+    if([1,2,3].some(i=>!selOf(card,'18a'+i))){ toast('Choose an answer for every question first 👆'); return; }
+    const bad=MC.filter(m=>selOf(card,m.q)!==m.want);
+    if(bad.length===0){ markAllOK(card); markDone(card); return; }
+    S.no(); MC.forEach(m=>markChoices(card,m.q,m.want));
+    hint('p18a','Cinnamoroll tip: keep the <b>back</b> straight when we sit, put the feet <b>flat on the floor</b>, '
+      +'and <b>have a shower</b> every day to keep the body clean! 🧼');
+  }};
+
+  /* --- p18b: yes / no --- */
+  const YN=[{v:'y',h:'Yes'},{v:'n',h:'No'}];
+  const WANT_B={'18b1':'y','18b2':'n'};
+  const STMT=['We should sit with our back straight.','Crossing our legs while sitting is a good posture.'];
+  let h2=`<div class="card" id="p18b">${cardHead('p18b','B','Yes or no? 🤔',
+    'B. Read each sentence. Is it right? Circle Yes or No.',true)}`;
+  h2+=STMT.map((t,i)=>`<div class="qline">${i+1}. ${t} ( ${choiceGroup('18b'+(i+1),shuf(YN))} )</div>`).join('');
+  h2+=cardFoot('p18b')+`</div>`;
+  G.cards['p18b']={check(){
+    const card=$('#p18b'); hintHide('p18b');
+    for(const q in WANT_B){ if(!selOf(card,q)){ toast('Choose an answer for BOTH questions first 👆'); return; } }
+    const bad=Object.keys(WANT_B).filter(q=>selOf(card,q)!==WANT_B[q]);
+    if(bad.length===0){ markAllOK(card); markDone(card);
+      mascotCheer('Back straight, feet flat — you know your posture! 🌟'); return; }
+    S.no(); for(const q in WANT_B)markChoices(card,q,WANT_B[q]);
+    hint('p18b','Cinnamoroll tip: sitting with the back straight is <b>Yes</b> 👍 — but crossing the legs while sitting is <b>No</b> 🙅, '
+      +'the feet should stay flat on the floor!');
+  }};
+
+  /* --- p18c: compare A vs B as a table --- */
+  const CMP=[
+    {part:'Back', a:'bent',    b:'straight', opts:[{v:'straight',h:'Straight'},{v:'bent',h:'Bent'}]},
+    {part:'Feet', a:'crossed', b:'flat',     opts:[{v:'flat',h:'Flat'},{v:'crossed',h:'Crossed'}]},
+    {part:'Head', a:'down',    b:'up',       opts:[{v:'up',h:'Up'},{v:'down',h:'Down'}]},
+    {part:'Chest',a:'down',    b:'up',       opts:[{v:'up',h:'Up'},{v:'down',h:'Down'}]}];
+  let h3=`<div class="card" id="p18c">${cardHead('p18c','C','Compare: who sits well? 🪑',
+    'C. Compare the sitting posture of Picture A and Picture B. Choose the correct answer for each body part in the table.',true)}`;
+  h3+=`<div class="case-scene">🖼️ Picture A: Ann writes with her head down low, back bent, legs crossed. 😖<br>🖼️ Picture B: Ben sits tall — back straight, feet flat. 😊</div>`;
+  h3+=`<table class="cmp-table"><tr><th>Body part</th><th>🖼️ Picture A (Ann)</th><th>🖼️ Picture B (Ben)</th></tr>`;
+  h3+=CMP.map((c,i)=>`<tr><td>${c.part}</td><td>${choiceGroup('18c'+i+'a',shuf(c.opts))}</td><td>${choiceGroup('18c'+i+'b',shuf(c.opts))}</td></tr>`).join('');
+  h3+=`</table>`+cardFoot('p18c')+`</div>`;
+  G.cards['p18c']={check(){
+    const card=$('#p18c'); hintHide('p18c');
+    const want={}; CMP.forEach((c,i)=>{ want['18c'+i+'a']=c.a; want['18c'+i+'b']=c.b; });
+    for(const q in want){ if(!selOf(card,q)){ toast('Choose an answer for A and B in EVERY row first 👆'); return; } }
+    const bad=Object.keys(want).filter(q=>selOf(card,q)!==want[q]);
+    if(bad.length===0){ markAllOK(card); markDone(card);
+      mascotCheer('Picture B sits like a star — back straight, feet flat, head and chest up! 🌟'); return; }
+    S.no(); for(const q in want)markChoices(card,q,want[q]);
+    hint('p18c','Cinnamoroll tip: Picture A — back <b>bent</b>, feet <b>crossed</b>, head <b>down</b>, chest <b>down</b>. '
+      +'Picture B — back <b>straight</b>, feet <b>flat</b>, head <b>up</b>, chest <b>up</b>. Sit like Picture B! 🪑');
+  }};
+
+  /* --- p18d: TYPE the answers (tolerant: trim + lowercase, | = synonyms) --- */
+  let h4=`<div class="card" id="p18d">${cardHead('p18d','D','Type the answers! ✏️',
+    'D. Fill in the blanks — TYPE the answer in each box. (Spelling counts, but capital letters do not!)',true)}`;
+  h4+=`<div class="qline inpline">1. We should keep our back <input class="typeblank" data-ans="straight" autocapitalize="off" autocomplete="off"> when we sit.</div>`;
+  h4+=`<div class="qline inpline">2. Good postures keep the <input class="typeblank" data-ans="backbone|back bone" autocapitalize="off" autocomplete="off"> in shape.</div>`;
+  h4+=`<div class="qline inpline">3. When we sit, we should keep our feet <input class="typeblank" data-ans="flat" autocapitalize="off" autocomplete="off"> on the floor.</div>`;
+  h4+=cardFoot('p18d')+`</div>`;
+  G.cards['p18d']={check(){
+    const card=$('#p18d'); hintHide('p18d');
+    const inps=$$('.typeblank',card);
+    if(inps.some(i=>!i.value.trim())){ toast('Type an answer in every blank first ✏️'); return; }
+    const ok=i=>i.dataset.ans.split('|').includes(i.value.trim().toLowerCase());
+    if(inps.every(ok)){ markAllOK(card); inps.forEach(markOK); markDone(card);
+      mascotCheer('You typed every answer — Cinnamoroll is proud! 🌟'); return; }
+    S.no(); inps.forEach(i=>ok(i)?markOK(i):markNO(i));
+    hint('p18d','Cinnamoroll tip: keep the back <b>straight</b>, good postures keep the <b>backbone</b> in shape, '
+      +'and the feet stay <b>flat</b> on the floor. Try typing again! ✏️');
+  }};
+  return [{banner:B18,html:h},{banner:B18,html:h2},{banner:B18,html:h3},{banner:B18,html:h4}];
+}
+
 /* ===== module registration (order = page order) ===== */
 defineModule('gs',{title:'WS1 A · label the body parts',                  build:buildP9});
 defineModule('gs',{title:'WS1 B · five senses',                           build:buildP10});
@@ -740,3 +832,4 @@ defineModule('gs',{title:'WS1 F · unit 1 revision',                       build
 defineModule('gs',{title:'Reading · fun facts about the human body',      build:buildP15});
 defineModule('gs',{title:'WS2 · good postures',                           build:buildP16});
 defineModule('gs',{title:'WS2 · my body & sense organs',                  build:buildP17});
+defineModule('gs',{title:'WS3 · my body & posture',                       build:buildP18});
