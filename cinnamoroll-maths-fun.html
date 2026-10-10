@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#BFE9FF">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
 <title>Cinnamoroll Learning Café · P1 Maths & General Studies</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1955,7 +1956,7 @@ function buildP12(){
     'A. Judging — do these people have good postures? Choose ✓ for good posture, ✗ for poor posture.',true)}`;
   h+=`<div class="postgrid">`+P.map((it,i)=>`<div class="postcard" data-ok="${it.ok?1:0}">
       <span class="ptxt">${it.t}</span>
-      <span class="choices pch"><button class="choice" data-v="y">✓</button><button class="choice" data-v="n">✗</button></span></div>`).join('')+`</div>`;
+      <span class="choices pch" data-q="12a${i}"><button class="choice" data-v="y">✓</button><button class="choice" data-v="n">✗</button></span></div>`).join('')+`</div>`;
   h+=`<div class="tip">Choose ✓ if the posture is good, or ✗ if it is poor.</div>`;
   h+=cardFoot('p12a')+`</div>`;
   G.cards['p12a']={check(){
