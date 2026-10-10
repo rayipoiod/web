@@ -1,0 +1,167 @@
+/* ============================================================
+   Subject-specific styles. One block per subject — add a new
+   block (e.g. /* ===== English ===== */ ) when you add a subject.
+   ============================================================ */
+
+/* ===== Maths (P1): trains, ten-frames, muffins, number tiles ===== */
+/* ten frames */
+.tf-row{display:flex; align-items:center; gap:8px; margin:12px 0; flex-wrap:wrap;}
+.tf-label{flex:none; min-width:60px; text-align:center; background:var(--blue); color:#fff;
+  font-weight:800; border-radius:12px; padding:10px 8px; font-size:17px;}
+.tf-label.small{font-size:12.5px; min-width:78px; line-height:1.15;}
+.tf-boxes{display:flex; flex-wrap:wrap; gap:6px;}
+.tf-box{width:46px; height:46px; border:3px dashed var(--bord); border-radius:12px;
+  background:#fff; position:relative;}
+.tf-box.on::after{content:''; position:absolute; inset:6px; border-radius:50%;
+  background:var(--dotc,#8EC9F5); box-shadow:inset -3px -4px 0 rgba(0,0,0,.08);}
+.tf-box:active{transform:scale(.92);}
+/* add / take away trays */
+.muffin-tray{display:flex; flex-wrap:wrap; gap:10px; background:#FFF6F9;
+  border:3px solid #FFCFE0; border-radius:20px; padding:12px; justify-content:center; margin:10px 0;}
+.muffin-tray.added{border-style:dashed; min-height:76px; background:#FFFBFD;}
+.muffin{width:54px; height:54px; font-size:29px; display:grid; place-items:center;
+  background:#fff; border:3px solid #FFCFE0; border-radius:14px;}
+.muffin:active{transform:scale(.9);}
+.pear{transition:opacity .3s, transform .3s, filter .3s;}
+.pear.removed{opacity:.14; transform:scale(.55) rotate(18deg); filter:grayscale(1);}
+.add-btn{display:block; margin:12px auto; padding:12px 30px; font-size:19px; font-weight:800;
+  color:#5b4200; background:linear-gradient(180deg,var(--gold),#FFB300); border:none;
+  border-radius:999px; box-shadow:0 5px 0 #C79000; min-height:52px;}
+.add-btn:active{transform:translateY(3px); box-shadow:0 2px 0 #C79000;}
+.speech{position:relative; background:#fff; border:3px solid var(--bord); border-radius:18px;
+  padding:10px 16px; font-size:19px; font-weight:800; color:var(--blue); margin:10px auto;
+  width:max-content; max-width:92%;}
+.speech::after{content:''; position:absolute; bottom:-14px; left:38px; border:9px solid transparent;
+  border-top-color:var(--bord);}
+/* trains */
+.train{display:flex; align-items:center; gap:0; margin:12px 0; flex-wrap:nowrap;}
+.wagon{width:76px; height:64px; border:3px solid #57708A; background:#fff; display:grid;
+  place-items:center; font-size:27px; font-weight:800; color:var(--ink); padding:0;}
+.wagon + .wagon{border-left:none;}
+.wagon:first-child{border-radius:10px 0 0 10px;}
+.wagon.blank{color:transparent; background:#FFFef4;}
+.wagon.blank.filled{color:var(--blue); background:#F0FAFF;}
+.wagon.blank.sel{outline:3px dashed var(--gold); outline-offset:-3px; animation:pulse 1s infinite;}
+.wagon.blank.filled.sel{color:var(--blue);}
+.trainnoza{width:26px; height:64px; background:#57708A; border-radius:6px 0 0 6px;}
+.arrow{font-size:40px; color:#57708A; font-weight:900; line-height:1; margin-left:-2px;}
+/* ---------- 5-friend queue ---------- */
+.friend.bub5{width:17%; max-width:104px;}
+.friend.bub5 img{max-width:86px;}
+.friend.bub5 .tag{font-size:12.5px; min-width:66px; min-height:38px; border-width:2.5px; padding:2px 5px;}
+.friend.bub .tag.given{border-style:solid; background:#EAFBF1; border-color:#9ADBB5;
+  color:var(--ink); pointer-events:none;}
+@media (max-width:420px){
+  .wagon{width:58px; height:56px; font-size:22px;}
+  .tf-box{width:38px; height:38px;}
+  .link-item{width:52px; height:52px; font-size:26px;}
+  .qline{font-size:18px;}
+}
+/* ---------- maths upgrade: tiles, dozen, tighter trains ---------- */
+.numtiles{display:flex; flex-wrap:wrap; gap:10px; margin:10px 0; justify-content:center;}
+.numtile{width:64px; height:64px; border:3px solid #E8A24B; background:linear-gradient(180deg,#FFC766,#FFA726);
+  border-radius:14px; font-size:27px; font-weight:800; color:#5b3a00; box-shadow:0 4px 0 #D68910;
+  display:grid; place-items:center; font-family:inherit; transition:transform .1s;}
+.numtile:active{transform:scale(.92);}
+.numtile.sel{border-radius:999px; border-color:var(--blue); background:linear-gradient(180deg,#fff,#E3F4FF);
+  color:var(--blue); box-shadow:0 0 0 4px #BFE0F7;}
+.doz-tile{display:inline-grid; place-items:center; width:58px; height:58px; border:3px solid #E8A24B;
+  background:linear-gradient(180deg,#FFC766,#FFA726); border-radius:14px; font-size:25px; font-weight:800;
+  color:#5b3a00; vertical-align:middle; box-shadow:0 3px 0 #D68910;}
+.gnum{color:var(--blue); font-weight:800;}
+.train.mid .wagon{width:62px; height:58px; font-size:23px;}
+.train.mid .trainnoza{width:22px; height:58px;}
+.train.tight .wagon{width:52px; height:50px; font-size:20px;}
+.train.tight .trainnoza{width:18px; height:50px;}
+.train.tight .arrow{font-size:30px;}
+@media (max-width:480px){
+  .train.mid .wagon{width:50px; height:46px; font-size:19px;}
+  .train.tight .wagon{width:40px; height:40px; font-size:16px;}
+}
+/* ===== queue direction ends ===== */
+.qends{display:flex; justify-content:space-between; font-size:13px; font-weight:800;
+  color:#4C7CA5; padding:2px 6px 0; margin-top:-6px;}
+.friend.bub .tag{cursor:pointer;}
+
+/* ===== General Studies (P1): body scene, judges, postcards ===== */
+/* ---------- General Studies: amazing feelings ---------- */
+.gs-scene{position:relative; width:100%; aspect-ratio:100/88; background:linear-gradient(180deg,#F4FBFF,#E4F4FF);
+  border:3px solid var(--bord); border-radius:20px; margin:12px 0 10px; overflow:hidden;}
+.gs-scene svg.gs-svg{position:absolute; inset:0; width:100%; height:100%; pointer-events:none;}
+.gs-line{stroke:#F76FA0; stroke-width:.7; opacity:.8; fill:none;}
+.gs-slot{position:absolute; width:21%; height:8.4%; border:2.5px dashed #9CC9EC; background:rgba(255,255,255,.94);
+  border-radius:11px; font-size:clamp(13px,2.9vw,20px); font-weight:800; color:#9CC9EC;
+  display:flex; align-items:center; justify-content:center; padding:0 2px; line-height:1.05; white-space:nowrap;}
+.gs-slot.sel{animation:pulse 1s infinite;}
+.gs-slot.filled{border-style:solid; border-color:var(--blue); color:var(--ink); background:#F3FBFF;}
+.gs-deco{position:absolute; left:28%; bottom:.5%; width:17%; pointer-events:none;
+  filter:drop-shadow(0 3px 4px rgba(46,134,193,.2));}
+/* ---------- GS pages 11-14 · Know Yourself enrichment ---------- */
+.legend{background:#EAF6FF; border:2px dashed #9CC9EC; border-radius:14px; padding:9px 12px;
+  font-weight:800; color:#33566E; font-size:16px; margin:10px 0; line-height:1.7;}
+.say{color:#4C7CA5; font-weight:800;}
+.jsc{font-size:38px; line-height:1; filter:drop-shadow(0 2px 2px rgba(0,0,0,.10));}
+.judge{width:52px; height:52px; min-width:52px; border-radius:50%; border:3px solid var(--bord);
+  background:#fff; font-size:26px; font-weight:900; color:var(--ink);
+  box-shadow:0 3px 0 rgba(46,74,102,.12);}
+.judge:active{transform:scale(.92);}
+.judge.j-col.y{background:#3DBB61; border-color:#2E9C4F; box-shadow:0 3px 0 #2E9C4F;}
+.judge.j-col.n{background:#E85D5D; border-color:#C74545; box-shadow:0 3px 0 #C74545;}
+.judge.j-sym::after{content:'?'; color:#B9D4EA;}
+.judge.j-sym.y::after{content:'✓'; color:#2E9C4F;}
+.judge.j-sym.n::after{content:'✗'; color:#E85D5D;}
+.judge.j-sym.y{border-color:#3DBB61;}
+.judge.j-sym.n{border-color:#E85D5D;}
+.jrow{display:flex; align-items:center; gap:12px; background:#F7FCFF; border:3px solid var(--bord);
+  border-radius:18px; padding:10px 12px; margin:10px 0; cursor:pointer;}
+.jrow:active{transform:scale(.99);}
+.jrow .stext{flex:1; font-size:19px; font-weight:700; color:var(--ink);}
+.postgrid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:12px 0;}
+.postcard{background:#F7FCFF; border:3px solid var(--bord); border-radius:20px; padding:12px 10px;
+  display:flex; flex-direction:column; align-items:center; gap:8px; cursor:pointer;}
+.postcard:active{transform:scale(.98);}
+.postcard .psc{font-size:54px; line-height:1.15;}
+.postcard .ptxt{font-size:15px; font-weight:800; text-align:center; color:#33566E; min-height:40px;}
+.case-scene{background:#FFF7E8; border:3px solid #F2D9A4; border-radius:16px; padding:11px 14px;
+  font-weight:700; color:#7A5B18; margin:10px 0; line-height:1.5; cursor:pointer;}
+.facts{display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin:12px 0;}
+.fact{background:#FFF7E8; border:3px solid #F2D9A4; border-radius:14px; padding:8px 10px;
+  font-size:15px; font-weight:700; color:var(--ink);}
+.fact b{color:#D68910;}
+.qq{font-weight:900; font-size:19px; margin:14px 0 6px; color:var(--ink); cursor:pointer;}
+.pcmp{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:12px 0;}
+.pcard{border:3px solid var(--bord); border-radius:16px; background:#F7FCFF; padding:10px 8px;
+  display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer;}
+.pcard .pic{font-size:44px; line-height:1.2;}
+.pcard small{font-weight:700; color:#4C7CA5; text-align:center; font-size:13px;}
+.pcard b{color:var(--blue); font-size:17px;}
+.mgroup{background:#FFFDF2; border:3px dashed #E8C84D; border-radius:18px; padding:12px; margin:14px 0;}
+.mgroup .mtitle{font-weight:900; font-size:19px; color:#8a6d00; margin:0 0 4px;}
+.mgroup .msub{font-size:14px; font-weight:700; color:#A98F2E; margin-bottom:8px;}
+.lbadge{width:40px; height:40px; min-width:40px; border-radius:12px; border:3px solid var(--bord);
+  background:#fff; display:flex; align-items:center; justify-content:center;
+  font-weight:900; font-size:20px; color:var(--blue);}
+.tickrow.letrow{padding:9px 10px;}
+.things{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:12px 0;}
+.thing{background:#fff; border:3px solid var(--bord); border-radius:18px; padding:10px 4px;
+  display:flex; flex-direction:column; align-items:center; gap:4px;
+  font-weight:800; font-size:14.5px; color:var(--ink); text-align:center;}
+.thing .ico{font-size:44px; line-height:1.1;}
+.thing.on{border-color:#3DBB61; background:#F2FCF6; box-shadow:0 0 0 3px #BFE8CB;}
+.thing:active{transform:scale(.96);}
+.draw-wrap{background:#fff; border:3px solid var(--bord); border-radius:20px; padding:10px; margin:12px 0;}
+.draw-wrap canvas{width:100%; height:auto; border:3px dashed #B9D4EA; border-radius:14px;
+  background:#FBFEFF; touch-action:none; display:block;}
+.draw-tools{display:flex; gap:10px; align-items:center; margin-top:9px; flex-wrap:wrap;}
+.swatch{width:42px; height:42px; border-radius:50%; border:3px solid #fff;
+  box-shadow:0 0 0 2px var(--bord); cursor:pointer;}
+.swatch.sel{box-shadow:0 0 0 4px var(--blue); transform:scale(1.08);}
+.clear-draw{padding:9px 18px; border-radius:999px; border:3px solid var(--bord); background:#fff;
+  font-weight:800; font-size:15px; color:#C74545; font-family:inherit; cursor:pointer;}
+.clear-draw:active{transform:scale(.95);}
+.inpline{display:flex; gap:8px; align-items:center; flex-wrap:wrap; font-size:19px;
+  font-weight:700; margin:10px 0; color:var(--ink);}
+.inpline input{font-size:19px; font-weight:800; color:var(--blue);
+  border:none; border-bottom:4px dashed var(--blue2); background:#F3FBFF;
+  border-radius:10px 10px 0 0; padding:6px 10px; font-family:inherit; min-width:130px;}
+#inpPart{width:170px;} #inpUse{width:240px;}

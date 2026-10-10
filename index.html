@@ -1,1 +1,100 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0; url=cinnamoroll-maths-fun.html"><title>Redirecting…</title></head><body><p><a href="cinnamoroll-maths-fun.html">Enter</a></p></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#BFE9FF">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<title>Cinnamoroll Learning Café</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/cards.css">
+<link rel="stylesheet" href="css/subjects.css">
+</head>
+<body>
+<div class="bg-cloud" style="top:6%; font-size:44px; animation-duration:46s;">☁️</div>
+<div class="bg-cloud" style="top:24%; font-size:30px; animation-duration:60s; animation-delay:-20s;">☁️</div>
+<div class="bg-cloud" style="top:52%; font-size:52px; animation-duration:75s; animation-delay:-45s;">☁️</div>
+<div class="bg-cloud" style="top:78%; font-size:34px; animation-duration:55s; animation-delay:-10s;">☁️</div>
+<div class="bg-cloud" style="top:14%; font-size:23px; animation-duration:92s; animation-delay:-32s;">✨</div>
+<div class="bg-cloud" style="top:64%; font-size:27px; animation-duration:72s; animation-delay:-15s;">🎈</div>
+<div class="bg-cloud" style="top:90%; font-size:24px; animation-duration:84s; animation-delay:-60s;">🍬</div>
+
+<div class="hdr">
+  <img class="logo" id="logoImg" alt="logo">
+  <div class="hdr-title">
+    <b>Cinnamoroll Learning Café ☁️</b>
+    <small>P1 · Maths &amp; General Studies · SRL style</small>
+  </div>
+  <div class="pill" id="starPill">⭐ 0/32</div>
+  <div class="pill pill-t" id="timerPill" style="display:none">⏱ 0:00</div>
+  <button class="shuf" id="shufBtn" title="Fresh questions!">🎲 New Qs</button>
+  <button class="hbtn" id="muteBtn">🔊</button>
+  <button class="hbtn" id="musicBtn" title="Cinnamoroll café waltz 🎵">🎵</button>
+</div>
+
+<div class="app">
+
+  <!-- ============ PAGE 1 · COVER ============ -->
+  <section class="page active" id="pg1">
+    <div class="cover">
+      <div class="school">
+        <b>Mathematics &amp; General Studies</b><br>
+        Topics: Positions · Numbers Up to 20 · Amazing Feelings (My Body)
+      </div>
+      <img class="hero float" id="heroImg" alt="Cinnamoroll">
+      <img class="macaron-badge float" id="macaronImg" alt="cafe" style="animation-delay:.8s">
+      <h1>Cinnamoroll Learning Café!</h1>
+      <div class="namecard">
+        <label>Name:</label><input id="kidName" maxlength="18" autocomplete="off">
+        <label>Class:</label><input id="kidClass" maxlength="6" value="P1F" autocomplete="off">
+        <label>Date:</label><input id="kidDate" readonly style="width:200px">
+      </div>
+      <div class="stream-row" id="streamRow"></div>
+      </div>
+  </section>
+
+  <!-- ============ QUESTION PAGES (one card per page — built by JS) ============ -->
+  <div id="pages"></div>
+
+</div>
+
+<footer class="ftr">
+  <button class="nav-btn home" id="homeBtn" title="Back to the index page" disabled>🏠</button>
+  <button class="nav-btn" id="prevBtn" disabled>‹</button>
+  <div class="dots" id="dots"></div>
+  <button class="nav-btn" id="nextBtn" disabled>›</button>
+</footer>
+
+<div id="mascot">
+  <div id="mascotSay"></div>
+  <img id="mascotImg" alt="Cinnamoroll buddy">
+</div>
+
+<div id="toast"></div>
+
+<div id="cert">
+  <div class="cert-card">
+    <img class="party" id="partyImg" alt="party">
+    <h2 id="certTitle">🌟 Official Maths Star! 🌟</h2>
+    <div class="cname" id="certName">Rachel</div>
+    <p id="certText">finished all 42 café &amp; GS challenges with Cinnamoroll &amp; friends!<br>
+      Milk only got to eat <b>3</b> cinnamon rolls because of you. 🍥🐶</p>
+    <button class="close-btn" id="certClose">Yay! Close 🎉</button>
+  </div>
+</div>
+<!-- scripts: core (load order matters) → subjects → boot -->
+<script src="js/core/10-assets.js"></script>
+<script src="js/core/20-helpers.js"></script>
+<script src="js/core/30-audio.js"></script>
+<script src="js/core/40-registry.js"></script>
+<script src="js/core/50-furniture.js"></script>
+<script src="js/core/60-pages.js"></script>
+<script src="js/core/70-interactions.js"></script>
+<script src="js/subjects/maths.js"></script>
+<script src="js/subjects/gs.js"></script>
+<script src="js/90-boot.js"></script>
+</body>
+</html>
