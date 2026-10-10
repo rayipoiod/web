@@ -509,7 +509,9 @@ input{font-family:inherit;}
   border-radius:16px; padding:10px 14px; margin:8px 0 14px; font-size:17px; font-weight:800; color:#2C6EA8;}
 .stat-rows{display:flex; flex-direction:column; gap:7px; margin:6px 0 14px;}
 .stat-row{display:flex; align-items:center; gap:9px; background:#fff; border:2px solid #DCEBF7;
-  border-radius:13px; padding:8px 12px; font-size:15.5px; font-weight:700; color:var(--ink);}
+  border-radius:13px; padding:8px 12px; font-size:15.5px; font-weight:700; color:var(--ink);
+  cursor:pointer;}
+.stat-row:hover{border-color:var(--blue2); background:#F5FBFF;}
 .stat-row .sn{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
 .stat-row .st{font-variant-numeric:tabular-nums; color:#2C6EA8; background:#EAF6FF;
   border-radius:999px; padding:2px 10px; font-size:13.5px; white-space:nowrap;}
@@ -2233,7 +2235,7 @@ function statsShell(st){ const math=st==='math';
 function renderStats(st){ const t=T[st]; const ids=STREAMS[st].cards;
   const rows=ids.map(id=>{ const ms=t.card[id]||0; const tr=t.tries[id]||0; const wr=t.wrong[id]||0;
     const badge= wr? `✘ ${wr} wrong tr${wr>1?'ies':'y'}` : (tr>1? `✓ solved (${tr} checks)` : '✓ first try!');
-    return `<div class="stat-row stext"><span class="sn">${CARD_TITLE[id]||id}</span>
+    return `<div class="stat-row stext" data-go="${CARD_PAGE[id]||''}" title="Tap to open this question"><span class="sn">${CARD_TITLE[id]||id}</span>
       <span class="sw ${wr?'retry':'good'}">${badge}</span>
       <span class="st">⏱ ${fmtT(ms)}</span></div>`; }).join('');
   $('#statRows-'+st).innerHTML=rows;
@@ -2251,6 +2253,8 @@ document.addEventListener('click',e=>{ const b=e.target.closest('#certBtn-math,#
   S.tada(); showCert(b.id.endsWith('math')?'math':'gs'); });
 document.addEventListener('click',e=>{ const b=e.target.closest('#againBtn-math,#againBtn-gs'); if(!b)return;
   const st=b.id.endsWith('math')?'math':'gs'; buildAll(); startStream(st); });
+document.addEventListener('click',e=>{ const r=e.target.closest('.stat-row[data-go]'); if(!r||!r.dataset.go)return;
+  S.tap(); go(+r.dataset.go); });
 
 /* ===== build one .page per question card, in stream order ===== */
 function mkPages(st,groups){ const pages=[];
