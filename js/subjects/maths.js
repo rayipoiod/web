@@ -161,14 +161,14 @@ function buildP4(){
   /* FIVE friends queue up. TWO names are already filled in as anchors —
      the child uses the clues to place the remaining THREE (unique solution,
      brute-force verified over all 3! = 6 arrangements before serving). */
-  const sol=shuf(CHARS);                       // index 4 = nearest door = front
+  const sol=shuf(CHARS).slice(0,5);           // index 4 = nearest door = front (queue row is sized for 5)
   const anchorPos=shuf([0,1,2,3,4]).slice(0,2).sort((a,b)=>a-b);
   const anchorSet=new Set(anchorPos);
   const unknownPos=[0,1,2,3,4].filter(i=>!anchorSet.has(i));
   const unknownNames=unknownPos.map(i=>sol[i].name);
   const idx={}; sol.forEach((c,i)=>idx[c.name]=i);
   /* pool of TRUE statements about the real queue */
-  const pool=[]; const names=CHARS.map(c=>c.name);
+  const pool=[]; const names=sol.map(c=>c.name);
   for(const a of names) for(const b of names){ if(a===b)continue;
     const d=idx[a]-idx[b];
     if(d===1){ pool.push({k:'jfront',a,b}); pool.push({k:'front',a,b}); }

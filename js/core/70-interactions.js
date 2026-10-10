@@ -140,3 +140,11 @@ function redraw(stage){ const svg=stage.querySelector('svg');
     p.line.setAttribute('x2',c2.x); p.line.setAttribute('y2',c2.y); }); }
 window.addEventListener('resize',()=>$$('.link-stage').forEach(redraw));
 window.addEventListener('scroll',()=>$$('.link-stage').forEach(redraw),{passive:true});
+
+/* instant press feedback — purely visual, fires before the click handlers (draw-pad canvas excluded) */
+const TAPPABLE='.choice,.chip,.blankslot,.numtile,.tf-box,.tickrow,.judge,.thing,.count-item,.check-btn,.nav-btn,.stream-btn,.nchip';
+document.addEventListener('pointerdown',e=>{ if(!(e.target instanceof Element))return;
+  const t=e.target.closest(TAPPABLE); if(t)t.classList.add('pressed'); });
+const unpress=()=>$$('.pressed').forEach(el=>el.classList.remove('pressed'));
+document.addEventListener('pointerup',unpress);
+document.addEventListener('pointercancel',unpress);

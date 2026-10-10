@@ -1,6 +1,6 @@
 /* ================= boot: cover, home buttons, init ================= */
 $('#logoImg').src=IMG.Q_CINNA;
-const HEROES=[IMG.COVER,IMG.HERO_STAR,IMG.HERO_BALLOON,IMG.HERO_CAFE,IMG.HERO_CAKE];
+const HEROES=[IMG.COVER,IMG.HERO_STAR,IMG.HERO_BALLOON,IMG.HERO_CAFE,IMG.HERO_CAKE,IMG.KITTY];
 function rollHero(){ $('#heroImg').src=pick(HEROES); }
 rollHero();
 $('#macaronImg').src=IMG.MACARON;
@@ -23,6 +23,11 @@ $('#streamRow').innerHTML=Object.values(SUBJECTS).map(s=>
 document.addEventListener('click',e=>{ const b=e.target.closest('.stream-btn'); if(!b)return;
   S.tada(); burstAt(b,22); startStream(b.dataset.subject);
   setTimeout(()=>toast('Tip: tap any words to hear Cinnamoroll read them aloud! 🔈',3400),1100); });
+
+/* Hello Kitty buddy — waves hello now and then, cover included */
+setInterval(()=>{ const k=$('#kitty'); if(!k)return;
+  k.classList.remove('wave'); void k.offsetWidth; k.classList.add('wave');
+  setTimeout(()=>k.classList.remove('wave'),800); },7000);
 
 $('#shufBtn').addEventListener('click',()=>{ buildAll(); S.sparkle(); mascotCheer('Fresh questions served! 🧁✨');
   paintStars(); if(G.stream)go(G.page); });

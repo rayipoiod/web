@@ -19,7 +19,7 @@ const praise=()=>PRAISE[Math.floor(Math.random()*PRAISE.length)];
 const NUDGE=["Oops! Milk may have nibbled that answer 🍼 Try again!","Almost! Cinnamoroll believes in you ☁️",
   "Hmm, count again with Cinnamoroll 🐶","Not quite — take a yummy breath 🧁","So close! One more look 👀"];
 const nudge=()=>NUDGE[Math.floor(Math.random()*NUDGE.length)];
-const CONF=['⭐','✨','☁️','🧁','💙','🎉','🍬','🍥'];
+const CONF=['⭐','✨','☁️','🧁','💙','🎉','🍬','🍥','🎀','💖','🌸'];
 function burst(x,y,n=16){ for(let i=0;i<n;i++){ const p=document.createElement('span'); p.className='cp';
   p.textContent=CONF[Math.floor(Math.random()*CONF.length)];
   p.style.left=(x-20+Math.random()*40)+'px'; p.style.top=(y-10+Math.random()*20)+'px';
@@ -27,15 +27,18 @@ function burst(x,y,n=16){ for(let i=0;i<n;i++){ const p=document.createElement('
 function burstAt(el,n=16){ const r=el.getBoundingClientRect(); burst(r.left+r.width/2, r.top+r.height/2, n); }
 
 /* ================= mascot buddy (cheers / Oops) ================= */
-const mascot=$('#mascot'), mascotSay=$('#mascotSay');
+const mascot=$('#mascot'), mascotSay=$('#mascotSay'), kitty=$('#kitty');
 $('#mascotImg').src=IMG.Q_CINNA;
+$('#kittyImg').src=IMG.KITTY;
 let sayT=null;
 function mascotSpeak(msg,ms=2400){ if(!mascotSay)return; mascotSay.innerHTML=msg;
   mascotSay.classList.add('show'); clearTimeout(sayT);
   sayT=setTimeout(()=>mascotSay.classList.remove('show'),ms); }
 function mascotCheer(msg){ if(!mascot)return; mascot.classList.remove('oops');
   void mascot.offsetWidth; mascot.classList.add('cheer'); mascotSpeak(msg);
-  setTimeout(()=>mascot.classList.remove('cheer'),1100); }
+  if(kitty){ kitty.classList.remove('oops'); void kitty.offsetWidth; kitty.classList.add('cheer'); }
+  setTimeout(()=>{ mascot.classList.remove('cheer'); if(kitty)kitty.classList.remove('cheer'); },1100); }
 function mascotOops(){ if(!mascot)return; mascot.classList.remove('cheer');
   void mascot.offsetWidth; mascot.classList.add('oops');
-  setTimeout(()=>mascot.classList.remove('oops'),1000); }
+  if(kitty){ kitty.classList.remove('cheer'); void kitty.offsetWidth; kitty.classList.add('oops'); }
+  setTimeout(()=>{ mascot.classList.remove('oops'); if(kitty)kitty.classList.remove('oops'); },1000); }
