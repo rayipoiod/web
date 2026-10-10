@@ -455,6 +455,10 @@ input{font-family:inherit;}
 .postcard .ptxt{font-size:15px; font-weight:800; text-align:center; color:#33566E; min-height:40px;}
 .case-scene{background:#FFF7E8; border:3px solid #F2D9A4; border-radius:16px; padding:11px 14px;
   font-weight:700; color:#7A5B18; margin:10px 0; line-height:1.5; cursor:pointer;}
+.facts{display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin:12px 0;}
+.fact{background:#FFF7E8; border:3px solid #F2D9A4; border-radius:14px; padding:8px 10px;
+  font-size:15px; font-weight:700; color:var(--ink);}
+.fact b{color:#D68910;}
 .qq{font-weight:900; font-size:19px; margin:14px 0 6px; color:var(--ink); cursor:pointer;}
 .pcmp{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:12px 0;}
 .pcard{border:3px solid var(--bord); border-radius:16px; background:#F7FCFF; padding:10px 8px;
@@ -573,7 +577,7 @@ input{font-family:inherit;}
         </button>
         <button class="stream-btn gs" id="startGSBtn">
           <span class="s-ico">🙋</span><b>General Studies</b>
-          <small>My Body · Senses · Postures · Clean Habits<br>16 questions · 16 stars ⭐ · one per page!</small>
+          <small>My Body · Senses · Postures · Clean Habits · Fun Facts<br>26 questions · 26 stars ⭐ · one per page!</small>
           <span class="go">Let's explore! 🌏 ➜</span>
         </button>
       </div>
@@ -604,7 +608,7 @@ input{font-family:inherit;}
     <img class="party" id="partyImg" alt="party">
     <h2 id="certTitle">🌟 Official Maths Star! 🌟</h2>
     <div class="cname" id="certName">Rachel</div>
-    <p id="certText">finished all 18 café &amp; GS challenges with Cinnamoroll &amp; friends!<br>
+    <p id="certText">finished all 42 café &amp; GS challenges with Cinnamoroll &amp; friends!<br>
       Milk only got to eat <b>3</b> cinnamon rolls because of you. 🍥🐶</p>
     <button class="close-btn" id="certClose">Yay! Close 🎉</button>
   </div>
@@ -646,7 +650,7 @@ const CHARS = [
 ];
 const DECO = {rainbow:IMG.STICKER_00, vampire:IMG.STICKER_01, icecream:IMG.STICKER_02,
   wizard:IMG.STICKER_03, glasses:IMG.STICKER_04, partyhat:IMG.STICKER_05,
-  balloons:IMG.STICKER_07, bat:IMG.D_BAT, unicorn:IMG.D_UNICORN, angel:IMG.D_ANGEL};
+  balloons:IMG.STICKER_07, bat:IMG.D_BAT, unicorn:IMG.D_UNICORN, angel:IMG.D_ANGEL, macaron:IMG.MACARON};
 
 /* ================= tiny helpers ================= */
 const $=(s,r=document)=>r.querySelector(s);
@@ -863,8 +867,9 @@ function mascotOops(){ if(!mascot)return; mascot.classList.remove('cheer');
 const STREAMS={
   math:{pages:[2,3,4,5,6,7,8],
     cards:['p2a','p2b','p2c','p3a','p4a','p5a','p6a','p6b','p7a','p7b','p7c','p7d','p8a','p8b','p8c','p8d']},
-  gs:{pages:[9,10,11,12,13,14],
-    cards:['p9a','p10a','p10b','p11a','p11b','p11c','p12a','p12b','p12c','p12d','p13a','p13b','p13c','p14a','p14b','p14c']} };
+  gs:{pages:[9,10,11,12,13,14,15,16,17],
+    cards:['p9a','p10a','p10b','p11a','p11b','p11c','p12a','p12b','p12c','p12d','p13a','p13b','p13c','p14a','p14b','p14c',
+      'p15a','p15b','p16a','p16b','p16c','p16d','p17a','p17b','p17c','p17d']} };
 const CARD_STREAM={}; STREAMS.math.cards.forEach(id=>CARD_STREAM[id]='math');
 STREAMS.gs.cards.forEach(id=>CARD_STREAM[id]='gs');
 const G={stream:null, page:1, cards:{}, done:{math:0, gs:0}};
@@ -2195,6 +2200,252 @@ function buildP14(){
   }};
   return [{banner:B14,html:h},{banner:B14,html:h2},{banner:B14,html:h3}];
 }
+
+/* ================= PAGE 15 · GS7 · fun facts about the human body ================= */
+function buildP15(){
+  const B15 = banner('balloons','Reading Article · Fun Facts About the Human Body',
+    'A–B. Your body is AMAZING! Read the fun facts, then answer the questions. 🧠❤️🦴');
+  const FACTS=[
+    ['🧠','Your brain weighs about 3 pounds.'],
+    ['❤️','Your heart beats about 100,000 times a day.'],
+    ['🦴','An adult body has 206 bones.'],
+    ['👀','Your eyes can see about 10 million different colors.'],
+    ['🧴','Your skin is the largest organ in your body.'],
+    ['👃','Your nose can remember about 50,000 different smells.']];
+  /* --- p15a: read the facts, then multiple-choice --- */
+  const MCQ=[
+    {q:'15a1',want:'Skin',text:'1. Which part of your body is the largest organ?',
+     opts:[{v:'Heart',h:'Heart'},{v:'Skin',h:'Skin'},{v:'Brain',h:'Brain'},{v:'Nose',h:'Nose'}]},
+    {q:'15a2',want:'206',text:'2. How many bones does an adult have in their body?',
+     opts:[{v:'106',h:'106 bones'},{v:'206',h:'206 bones'},{v:'306',h:'306 bones'},{v:'406',h:'406 bones'}]},
+    {q:'15a3',want:'Tongue',text:'3. Which sense organ do you use to taste food?',
+     opts:[{v:'Nose',h:'Nose'},{v:'Teeth',h:'Teeth'},{v:'Tongue',h:'Tongue'},{v:'Ears',h:'Ears'}]}];
+  let h=`<div class="card" id="p15a">${cardHead('p15a','A','Fun body facts — read and choose! 🧠',
+    'A. Read the fun facts, then circle the correct answer for each question.',true)}`;
+  h+=`<div class="facts">`+FACTS.map(f=>`<div class="fact">${f[0]} ${f[1]}</div>`).join('')+`</div>`;
+  h+=MCQ.map(m=>`<div class="qq">${m.text}</div><div class="qline">( ${choiceGroup(m.q,shuf(m.opts))} )</div>`).join('');
+  h+=cardFoot('p15a')+`</div>`;
+  G.cards['p15a']={check(){
+    const card=$('#p15a'); hintHide('p15a');
+    for(const m of MCQ){ if(!selOf(card,m.q)){ toast('Choose an answer for EVERY question first 👆'); return; } }
+    const bad=MCQ.filter(m=>selOf(card,m.q)!==m.want);
+    if(bad.length===0){ markAllOK(card); markDone(card);
+      mascotCheer('Your body is AMAZING — and so are YOU! 🌟'); return; }
+    S.no(); MCQ.forEach(m=>markChoices(card,m.q,m.want));
+    hint('p15a','Cinnamoroll tip: the <b>skin</b> is the largest organ, an adult has <b>206</b> bones, '
+      +'and you taste food with your <b>tongue</b>! Re-read the fun facts above. 📖');
+  }};
+
+  /* --- p15b: circle the correct answer --- */
+  let h2=`<div class="card" id="p15b">${cardHead('p15b','B','Fun body facts — think! ❤️',
+    'B. Circle the correct answer. (Your heart works even while you sleep — wow!)',true)}`;
+  h2+=`<div class="qq">1. Does your heart stop beating and take a rest when you are asleep at night?</div>`;
+  h2+=`<div class="qline">( ${choiceGroup('15b1',shuf([{v:'Yes',h:'Yes 😴'},{v:'No',h:'No 🏃'}]))} )</div>`;
+  h2+=`<div class="qq">2. Compare your fingerprints with your classmates\u2019 fingerprints. What will you notice?</div>`;
+  h2+=`<div class="qline">They look ( ${choiceGroup('15b2',shuf([{v:'same',h:'the same'},{v:'different',h:'different'}]))} ) , because everyone\u2019s fingerprint is unique.</div>`;
+  h2+=cardFoot('p15b')+`</div>`;
+  G.cards['p15b']={check(){
+    const card=$('#p15b'); hintHide('p15b');
+    const want={'15b1':'No','15b2':'different'};
+    for(const q in want){ if(!selOf(card,q)){ toast('Choose an answer for BOTH questions first 👆'); return; } }
+    const bad=Object.keys(want).filter(q=>selOf(card,q)!==want[q]);
+    if(bad.length===0){ markAllOK(card); markDone(card);
+      mascotCheer('Your heart never rests — and YOU are one of a kind! 🌟'); return; }
+    S.no(); for(const q in want)markChoices(card,q,want[q]);
+    hint('p15b','Cinnamoroll tip: your heart beats day and night — it <b>never</b> takes a rest, even when you sleep! ❤️ '
+      +'Everyone\u2019s fingerprints look <b>different</b> — that is why they can tell people apart. 🖐️');
+  }};
+  return [{banner:B15,html:h},{banner:B15,html:h2}];
+}
+
+/* ================= PAGE 16 · GS8 · worksheet 2 — good postures ================= */
+function buildP16(){
+  const B16 = banner('glasses','General Studies Worksheet 2 · Good Postures',
+    'A–D. Sit tall, stand tall — let\u2019s check everyone\u2019s postures! 🧍📺');
+  /* --- p16a: good or bad posture (√ / X) --- */
+  const POST=[
+    {e:'🧍‍♀️',t:'Mia stands up straight and tall.',ok:'good'},
+    {e:'📚',t:'Tom carries a tower of heavy books — his back is bent.',ok:'bad'},
+    {e:'📞',t:'Ann writes with her head down and holds the phone with her shoulder.',ok:'bad'},
+    {e:'🛏️',t:'Lee sleeps all curled up on his tummy.',ok:'bad'},
+    {e:'🎒',t:'Sam\u2019s school bag is too heavy — he bends under it.',ok:'bad'},
+    {e:'📖',t:'Nora lies on her tummy to read her book.',ok:'bad'}];
+  let h=`<div class="card" id="p16a">${cardHead('p16a','A','Good posture or bad posture? 🧍',
+    'A. Does the child have good posture or bad posture? Put a ✓ for good posture or a ✗ for bad posture.',true)}`;
+  h+=POST.map((p,i)=>`<div class="qline">${i+1}. ${p.e} ${p.t} ( ${choiceGroup('16a'+(i+1),[{v:'good',h:'✓ good'},{v:'bad',h:'✗ bad'}])} )</div>`).join('');
+  h+=cardFoot('p16a')+`</div>`;
+  G.cards['p16a']={check(){
+    const card=$('#p16a'); hintHide('p16a');
+    const want={}; POST.forEach((p,i)=>want['16a'+(i+1)]=p.ok);
+    for(const q in want){ if(!selOf(card,q)){ toast('Choose ✓ or ✗ for EVERY child first 👆'); return; } }
+    const bad=Object.keys(want).filter(q=>selOf(card,q)!==want[q]);
+    if(bad.length===0){ markAllOK(card); markDone(card); return; }
+    S.no(); for(const q in want)markChoices(card,q,want[q]);
+    hint('p16a','Cinnamoroll tip: only Mia has a <b>good</b> posture — standing straight and tall. '
+      +'Bending under heavy books 📚, head down while writing 📞, sleeping curled on the tummy 🛏️, '
+      +'a too-heavy school bag 🎒 and reading on the tummy 📖 are all <b>bad</b> postures! ✗');
+  }};
+
+  /* --- p16b: matching — TV postures --- */
+  const TVROW=[{e:'👀',t:'Eyes',key:'eyes'},{e:'🦴',t:'Back',key:'back'},
+    {e:'😊',t:'Head',key:'head'},{e:'🦶',t:'Feet',key:'feet'}];
+  const TVOPT=[
+    {v:'eyes',h:'Keep them the same level with the TV'},
+    {v:'back',h:'Keep it straight and supported'},
+    {v:'head',h:'Keep it up'},
+    {v:'feet',h:'Keep them flat on the floor'},
+    {v:'down',h:'Keep them down'}];
+  let h2=`<div class="card" id="p16b">${cardHead('p16b','B','TV time, tall and comfy! 📺',
+    'B. How should we keep good posture when watching TV? Choose the correct answer for each body part. (One answer is extra!)',true)}`;
+  h2+=TVROW.map(r=>`<div class="qline"><b>${r.e} ${r.t}</b> → ( ${choiceGroup('16b-'+r.key,shuf(TVOPT))} )</div>`).join('');
+  h2+=cardFoot('p16b')+`</div>`;
+  G.cards['p16b']={check(){
+    const card=$('#p16b'); hintHide('p16b');
+    const want={'16b-eyes':'eyes','16b-back':'back','16b-head':'head','16b-feet':'feet'};
+    for(const q in want){ if(!selOf(card,q)){ toast('Choose an answer for EVERY body part first 👆'); return; } }
+    const bad=Object.keys(want).filter(q=>selOf(card,q)!==want[q]);
+    if(bad.length===0){ markAllOK(card); markDone(card); return; }
+    S.no(); for(const q in want)markChoices(card,q,want[q]);
+    hint('p16b','Cinnamoroll tip: when watching TV keep your <b>eyes</b> the same level with the TV, your <b>back</b> straight and supported, '
+      +'your <b>head</b> up, and your <b>feet</b> flat on the floor. "Keep them down" is the extra answer! 📺');
+  }};
+
+  /* --- p16c: compare sitting postures A vs B --- */
+  const CMP=[
+    {part:'Back',a:'bent',b:'straight',opts:[{v:'straight',h:'Straight'},{v:'bent',h:'Bent'}]},
+    {part:'Feet',a:'crossed',b:'flat',opts:[{v:'flat',h:'Flat'},{v:'crossed',h:'Crossed'}]},
+    {part:'Head',a:'down',b:'up',opts:[{v:'up',h:'Up'},{v:'down',h:'Down'}]},
+    {part:'Chest',a:'down',b:'up',opts:[{v:'up',h:'Up'},{v:'down',h:'Down'}]}];
+  let h3=`<div class="card" id="p16c">${cardHead('p16c','C','Compare: who sits well? 🪑',
+    'C. Compare the sitting posture of Picture A and Picture B. Choose the correct answer for each body part.',true)}`;
+  h3+=`<div class="case-scene">🖼️ Picture A: Ann writes with her head down low, back bent, legs crossed. 😖<br>🖼️ Picture B: Ben sits tall — back straight, feet flat. 😊</div>`;
+  h3+=CMP.map((c,i)=>`<div class="qline"><b>${c.part}</b> — A: ( ${choiceGroup('16c'+i+'a',shuf(c.opts))} ) B: ( ${choiceGroup('16c'+i+'b',shuf(c.opts))} )</div>`).join('');
+  h3+=cardFoot('p16c')+`</div>`;
+  G.cards['p16c']={check(){
+    const card=$('#p16c'); hintHide('p16c');
+    const want={}; CMP.forEach((c,i)=>{ want['16c'+i+'a']=c.a; want['16c'+i+'b']=c.b; });
+    for(const q in want){ if(!selOf(card,q)){ toast('Choose an answer for A and B in EVERY row first 👆'); return; } }
+    const bad=Object.keys(want).filter(q=>selOf(card,q)!==want[q]);
+    if(bad.length===0){ markAllOK(card); markDone(card);
+      mascotCheer('Picture B sits like a star — back straight, feet flat, head and chest up! 🌟'); return; }
+    S.no(); for(const q in want)markChoices(card,q,want[q]);
+    hint('p16c','Cinnamoroll tip: Picture A — back <b>bent</b>, feet <b>crossed</b>, head <b>down</b>, chest <b>down</b>. '
+      +'Picture B — back <b>straight</b>, feet <b>flat</b>, head <b>up</b>, chest <b>up</b>. Sit like Picture B! 🪑');
+  }};
+
+  /* --- p16d: fill in the blanks --- */
+  let h4=`<div class="card" id="p16d">${cardHead('p16d','D','Protect your backbone ✏️',
+    'D. Fill in the blanks — write the correct answers on the ______.',true)}`;
+  h4+=`<div class="qline">1. To protect the <button class="blank blankslot" data-ans="backbone">&nbsp;</button> , we should have good posture when we sit, stand, and walk.</div>`;
+  h4+=`<div class="qline">2. We should keep the back <button class="blank blankslot" data-ans="straight">&nbsp;</button> when we sit, stand, and walk.</div>`;
+  h4+=`<div class="qline">3. We should also have <button class="blank blankslot" data-ans="good posture">&nbsp;</button> when we read, use the computer, carry the school bag, and pick up and carry things.</div>`;
+  h4+=chipTray(['backbone','straight','good posture','curved','junk food'],'Word box — tap a word, then tap the ______. Some words are extra!');
+  h4+=cardFoot('p16d')+`</div>`;
+  G.cards['p16d']={check(){
+    const card=$('#p16d'); hintHide('p16d');
+    const slots=$$('.blankslot',card);
+    if(slots.some(s=>!s.dataset.val)){ toast('Fill every ______ first ☁️'); return; }
+    const bad=slots.filter(s=>s.dataset.val!==s.dataset.ans);
+    if(bad.length===0){ markAllOK(card); markDone(card); return; }
+    S.no(); slots.forEach(s=>{ (s.dataset.val===s.dataset.ans)?markOK(s):markNO(s); });
+    hint('p16d','Cinnamoroll tip: protect the <b>backbone</b>! Keep the back <b>straight</b> when we sit, stand and walk, '
+      +'and always have a <b>good posture</b> when we read, use the computer, carry the school bag, and pick up and carry things. 🎒');
+  }};
+  return [{banner:B16,html:h},{banner:B16,html:h2},{banner:B16,html:h3},{banner:B16,html:h4}];
+}
+
+/* ================= PAGE 17 · GS9 · my body & sense organs ================= */
+function buildP17(){
+  const B17 = banner('unicorn','Unit 1 · Know Yourself — My Body & Sense Organs',
+    'A–D. Body parts, sense organs, and how to protect them! 🙋👀👂👃👅✋');
+  /* --- p17a: uses of the sense organs --- */
+  const SENSES=[{v:'see',h:'A. See'},{v:'hear',h:'B. Hear'},{v:'smell',h:'C. Smell'},{v:'taste',h:'D. Taste'},{v:'touch',h:'E. Touch'}];
+  const SCEN=[
+    {e:'🍟',t:'Ken eats a box of potato chips.',key:'taste'},
+    {e:'🐶',t:'May strokes the soft, furry dog.',key:'touch'},
+    {e:'📱',t:'Ann looks at pictures on the tablet.',key:'see'},
+    {e:'🎧',t:'Tim listens to music with his headphones.',key:'hear'},
+    {e:'💐',t:'Jo smells the pretty flowers.',key:'smell'}];
+  let h=`<div class="card" id="p17a">${cardHead('p17a','A','What are the uses of the sense organs? 👀',
+    'A. What are the uses of the sense organs? Choose the letter of the correct answer for each picture.',true)}`;
+  h+=SCEN.map((s,i)=>`<div class="qline">${i+1}. ${s.e} ${s.t} ( ${choiceGroup('17a'+(i+1),SENSES)} )</div>`).join('');
+  h+=cardFoot('p17a')+`</div>`;
+  G.cards['p17a']={check(){
+    const card=$('#p17a'); hintHide('p17a');
+    const want={}; SCEN.forEach((s,i)=>want['17a'+(i+1)]=s.key);
+    for(const q in want){ if(!selOf(card,q)){ toast('Choose a letter for EVERY picture first 👆'); return; } }
+    const bad=Object.keys(want).filter(q=>selOf(card,q)!==want[q]);
+    if(bad.length===0){ markAllOK(card); markDone(card); return; }
+    S.no(); for(const q in want)markChoices(card,q,want[q]);
+    hint('p17a','Cinnamoroll tip: eyes <b>see</b> (A), ears <b>hear</b> (B), nose <b>smells</b> (C), tongue <b>tastes</b> (D), '
+      +'and skin <b>touches</b> (E). Chips → D, the dog → E, the tablet → A, music → B, flowers → C! 🙋');
+  }};
+
+  /* --- p17b: protecting the sense organs (√ / X) --- */
+  const PROTECT=[
+    {e:'🧴',t:'May puts on sun cream at the beach.',ok:'good'},
+    {e:'🥗',t:'Ben eats his fruit and vegetables.',ok:'good'},
+    {e:'✏️',t:'Ken puts his dirty pencil in his mouth.',ok:'bad'},
+    {e:'😴',t:'Ann sleeps with very loud music on her headphones.',ok:'bad'},
+    {e:'🚧',t:'Tom watches the loud drilling up close — he does not cover his ears.',ok:'bad'}];
+  let h2=`<div class="card" id="p17b">${cardHead('p17b','B','Protect your sense organs! 🛡️',
+    'B. Are the children protecting their sense organs? Put a ✓ for yes or a ✗ for no.',true)}`;
+  h2+=PROTECT.map((p,i)=>`<div class="qline">${i+1}. ${p.e} ${p.t} ( ${choiceGroup('17b'+(i+1),[{v:'good',h:'✓ yes'},{v:'bad',h:'✗ no'}])} )</div>`).join('');
+  h2+=cardFoot('p17b')+`</div>`;
+  G.cards['p17b']={check(){
+    const card=$('#p17b'); hintHide('p17b');
+    const want={}; PROTECT.forEach((p,i)=>want['17b'+(i+1)]=p.ok);
+    for(const q in want){ if(!selOf(card,q)){ toast('Choose ✓ or ✗ for EVERY child first 👆'); return; } }
+    const bad=Object.keys(want).filter(q=>selOf(card,q)!==want[q]);
+    if(bad.length===0){ markAllOK(card); markDone(card); return; }
+    S.no(); for(const q in want)markChoices(card,q,want[q]);
+    hint('p17b','Cinnamoroll tip: sun cream protects the skin and healthy food keeps the body strong — <b>✓ ✓</b>. '
+      +'But dirty things in the mouth, very loud music on headphones, and loud drilling without covering the ears can hurt our sense organs — <b>✗ ✗ ✗</b>!');
+  }};
+
+  /* --- p17c: which part is mainly moving? --- */
+  const MOPT=[{v:'head',h:'Head'},{v:'trunk',h:'Trunk'},{v:'arm',h:'Arm'},{v:'leg',h:'Leg'}];
+  const MOVE=[
+    {e:'👋',t:'Waving "hello"!',key:'arm'},
+    {e:'🤸',t:'Bending backwards like a rainbow.',key:'trunk'},
+    {e:'🙂',t:'Shaking the head to say "no".',key:'head'},
+    {e:'⚽',t:'Kicking the football.',key:'leg'}];
+  let h3=`<div class="card" id="p17c">${cardHead('p17c','C','Which part is mainly moving? 🤸',
+    'C. Which part of the body are the children mainly moving? Circle the correct answer.',true)}`;
+  h3+=MOVE.map((m,i)=>`<div class="qline">${i+1}. ${m.e} ${m.t} ( ${choiceGroup('17c'+(i+1),shuf(MOPT))} )</div>`).join('');
+  h3+=cardFoot('p17c')+`</div>`;
+  G.cards['p17c']={check(){
+    const card=$('#p17c'); hintHide('p17c');
+    const want={}; MOVE.forEach((m,i)=>want['17c'+(i+1)]=m.key);
+    for(const q in want){ if(!selOf(card,q)){ toast('Choose an answer for EVERY child first 👆'); return; } }
+    const bad=Object.keys(want).filter(q=>selOf(card,q)!==want[q]);
+    if(bad.length===0){ markAllOK(card); markDone(card); return; }
+    S.no(); for(const q in want)markChoices(card,q,want[q]);
+    hint('p17c','Cinnamoroll tip: waving moves the <b>arm</b> 👋, bending backwards moves the <b>trunk</b> 🤸, '
+      +'shaking "no" moves the <b>head</b> 🙂, and kicking the ball moves the <b>leg</b> ⚽!');
+  }};
+
+  /* --- p17d: fill in the blanks --- */
+  let h4=`<div class="card" id="p17d">${cardHead('p17d','D','My amazing body — fill in! ✏️',
+    'D. Fill in the blanks — write the correct answers on the ______.',true)}`;
+  h4+=`<div class="qline">1. I have a <button class="blank blankslot" data-ans="head">&nbsp;</button> , a <button class="blank blankslot" data-ans="trunk">&nbsp;</button> , two <button class="blank blankslot" data-ans="arms">&nbsp;</button> and two <button class="blank blankslot" data-ans="legs">&nbsp;</button> .</div>`;
+  h4+=`<div class="qline">2. I can <button class="blank blankslot" data-ans="sense">&nbsp;</button> things around me with my eyes, ears, nose, tongue and skin.</div>`;
+  h4+=`<div class="qline">3. I should take <button class="blank blankslot" data-ans="care">&nbsp;</button> of my body.</div>`;
+  h4+=chipTray(['head','trunk','arms','legs','sense','care','fingers','soap'],'Word box — tap a word, then tap the ______. Some words are extra!');
+  h4+=cardFoot('p17d')+`</div>`;
+  G.cards['p17d']={check(){
+    const card=$('#p17d'); hintHide('p17d');
+    const slots=$$('.blankslot',card);
+    if(slots.some(s=>!s.dataset.val)){ toast('Fill every ______ first ☁️'); return; }
+    const bad=slots.filter(s=>s.dataset.val!==s.dataset.ans);
+    if(bad.length===0){ markAllOK(card); markDone(card);
+      mascotCheer('Head, trunk, arms and legs — take good care of your amazing body! 🌟'); return; }
+    S.no(); slots.forEach(s=>{ (s.dataset.val===s.dataset.ans)?markOK(s):markNO(s); });
+    hint('p17d','Cinnamoroll tip: I have a <b>head</b>, a <b>trunk</b>, two <b>arms</b> and two <b>legs</b>. '
+      +'I can <b>sense</b> things with my eyes, ears, nose, tongue and skin — so I should take <b>care</b> of my body! 💖');
+  }};
+  return [{banner:B17,html:h},{banner:B17,html:h2},{banner:B17,html:h3},{banner:B17,html:h4}];
+}
 </script>
 <script>
 /* ================= wiring: one card per page + timers + stats ================= */
@@ -2224,7 +2475,7 @@ setInterval(paintTimer,500);
 function statsShell(st){ const math=st==='math';
   return `<div class="card" id="stats-${st}">${cardHead('stats-'+st,'🏆',
     (math?'My Maths report card!':'My Body Explorer report card!')+' 📊',
-    (math?'You finished ALL 16 maths challenges!':'You finished ALL 16 body adventures!')
+    `You finished ALL ${STREAMS[st].cards.length} ${math?'maths challenges':'body adventures'}!`
       +' Here is how you did — every question, your time and your tries.',false)}
     <div class="stats-hero" id="statsHero-${st}"></div>
     <div class="stat-rows" id="statRows-${st}"></div>
@@ -2286,7 +2537,7 @@ function buildAll(){
   for(const k in CARD_TITLE)delete CARD_TITLE[k];
   $$('.page.dyn').forEach(p=>p.remove()); pageSeq=1;
   STREAMS.math.pages=mkPages('math',[buildP2(),buildP3(),buildP4(),buildP5(),buildP6(),buildP7(),buildP8()]);
-  STREAMS.gs.pages=mkPages('gs',[buildP9(),buildP10(),buildP11(),buildP12(),buildP13(),buildP14()]);
+  STREAMS.gs.pages=mkPages('gs',[buildP9(),buildP10(),buildP11(),buildP12(),buildP13(),buildP14(),buildP15(),buildP16(),buildP17()]);
   const dc=$('#drawCv'); if(dc)initDrawPad(dc);
   $$('.page').forEach(p=>$$('.card',p).forEach(c=>c.classList.remove('done')));
   paintDots(); paintStars(); paintTimer();
